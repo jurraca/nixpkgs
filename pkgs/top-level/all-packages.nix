@@ -389,7 +389,7 @@ with pkgs;
 
   gpick = callPackage ../tools/misc/gpick { };
 
-  hobbes = callPackage ../development/tools/hobbes { };
+  hobbes = callPackage ../development/tools/hobbes { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   html5validator = python3Packages.callPackage ../applications/misc/html5validator { };
 
@@ -1628,7 +1628,7 @@ with pkgs;
 
   writefreely = callPackage ../applications/misc/writefreely { };
 
-  iqueue = callPackage ../development/libraries/iqueue { };
+  iqueue = callPackage ../development/libraries/iqueue { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   lifecycled = callPackage ../tools/misc/lifecycled { };
 
@@ -2142,7 +2142,7 @@ with pkgs;
 
   dfmt = callPackage ../tools/text/dfmt { };
 
-  diopser = callPackage ../applications/audio/diopser { };
+  diopser = callPackage ../applications/audio/diopser { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   diskonaut = callPackage ../tools/misc/diskonaut { };
 
@@ -2242,7 +2242,7 @@ with pkgs;
 
   gamecube-tools = callPackage ../development/tools/gamecube-tools { };
 
-  gammy = qt5.callPackage ../tools/misc/gammy { };
+  gammy = qt5.callPackage ../tools/misc/gammy { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   gams = callPackage ../tools/misc/gams (config.gams or {});
 
@@ -3006,7 +3006,7 @@ with pkgs;
 
   clingo = callPackage ../applications/science/logic/potassco/clingo.nix { };
 
-  clingcon = callPackage ../applications/science/logic/potassco/clingcon.nix { };
+  clingcon = callPackage ../applications/science/logic/potassco/clingcon.nix { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   clprover = callPackage ../applications/science/logic/clprover/clprover.nix { };
 
@@ -3335,7 +3335,7 @@ with pkgs;
     gst-plugins-good = gst_all_1.gst-plugins-good.override { gtkSupport = true; };
   };
 
-  djv = callPackage ../applications/graphics/djv { };
+  djv = callPackage ../applications/graphics/djv { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   dnschef = python3Packages.callPackage ../tools/networking/dnschef { };
 
@@ -4548,9 +4548,7 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) Carbon IOKit;
   };
 
-  cemu = qt5.callPackage ../applications/science/math/cemu {
-    stdenv = gcc9Stdenv;
-  };
+  cemu = qt5.callPackage ../applications/science/math/cemu  { stdenv = gcc9Stdenv; };
 
   cider = callPackage ../applications/audio/cider { };
 
@@ -4736,7 +4734,7 @@ with pkgs;
 
   evscript = callPackage ../tools/inputmethods/evscript { };
 
-  gebaar-libinput = callPackage ../tools/inputmethods/gebaar-libinput { };
+  gebaar-libinput = callPackage ../tools/inputmethods/gebaar-libinput { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   kime = callPackage ../tools/inputmethods/kime { };
 
@@ -5619,7 +5617,7 @@ with pkgs;
 
   endlessh-go = callPackage ../servers/endlessh-go { };
 
-  ericw-tools = callPackage ../applications/misc/ericw-tools { };
+  ericw-tools = callPackage ../applications/misc/ericw-tools { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   cryfs = callPackage ../tools/filesystems/cryfs { };
 
@@ -6651,7 +6649,7 @@ with pkgs;
 
   robodoc = callPackage ../tools/text/robodoc { };
 
-  ucg = callPackage ../tools/text/ucg { };
+  ucg = callPackage ../tools/text/ucg { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   grive2 = callPackage ../tools/filesystems/grive2 { };
 
@@ -6715,9 +6713,7 @@ with pkgs;
 
   grub2_pvgrub_image = callPackage ../tools/misc/grub/pvgrub_image { };
 
-  grub4dos = callPackage ../tools/misc/grub4dos {
-    stdenv = stdenv_32bit;
-  };
+  grub4dos = callPackage ../tools/misc/grub4dos { stdenv = stdenv_32bit; };
 
   gruut = with python3.pkgs; toPythonApplication gruut;
 
@@ -6733,6 +6729,7 @@ with pkgs;
   gsmartcontrol = callPackage ../tools/misc/gsmartcontrol { };
 
   gsmlib = callPackage ../development/libraries/gsmlib {
+    stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;
     autoreconfHook = buildPackages.autoreconfHook269;
   };
 
@@ -6864,6 +6861,7 @@ with pkgs;
   halibut = callPackage ../tools/typesetting/halibut { };
 
   halide = callPackage ../development/compilers/halide {
+    stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;
     llvmPackages = llvmPackages_9;
   };
 
@@ -7057,7 +7055,8 @@ with pkgs;
 
   idle3tools = callPackage ../tools/system/idle3tools { };
 
-  ifcopenshell = with python3Packages; toPythonApplication ifcopenshell;
+  ifcopenshell = with python3Packages; (toPythonApplication ifcopenshell).override
+    { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   iftop = callPackage ../tools/networking/iftop { };
 
@@ -12450,7 +12449,7 @@ with pkgs;
     '';
   };
 
-  copper = callPackage ../development/compilers/copper {};
+  copper = callPackage ../development/compilers/copper { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;;
 
   inherit (callPackages ../development/compilers/crystal {
     llvmPackages = if stdenv.system == "aarch64-darwin" then llvmPackages_11 else llvmPackages_10;
@@ -16954,7 +16953,7 @@ with pkgs;
 
   cutelyst = libsForQt5.callPackage ../development/libraries/cutelyst { };
 
-  cxxtools = callPackage ../development/libraries/cxxtools { };
+  cxxtools = callPackage ../development/libraries/cxxtools { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   cwiid = callPackage ../development/libraries/cwiid { };
 
@@ -26212,9 +26211,9 @@ with pkgs;
 
   flrig = callPackage ../applications/radio/flrig { };
 
-  fluxus = callPackage ../applications/graphics/fluxus { };
+  fluxus = callPackage ../applications/graphics/fluxus { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
-  flwrap = callPackage ../applications/radio/flwrap { };
+  flwrap = callPackage ../applications/radio/flwrap { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   fluidsynth = callPackage ../applications/audio/fluidsynth {
     inherit (darwin.apple_sdk.frameworks) AudioUnit CoreAudio CoreMIDI CoreServices;
@@ -26906,7 +26905,7 @@ with pkgs;
     inherit (gnome2) GConf;
   };
 
-  gosmore = callPackage ../applications/misc/gosmore { };
+  gosmore = callPackage ../applications/misc/gosmore { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   gpsbabel = libsForQt5.callPackage ../applications/misc/gpsbabel {
     inherit (darwin) IOKit;
@@ -31646,6 +31645,7 @@ with pkgs;
   dwarf-therapist = dwarf-fortress-packages.dwarf-therapist;
 
   dxx-rebirth = callPackage ../games/dxx-rebirth {
+    stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;
     physfs = physfs_2;
   };
 
@@ -31807,7 +31807,7 @@ with pkgs;
 
   gogui = callPackage ../games/gogui { };
 
-  gscrabble = python3Packages.callPackage ../games/gscrabble { };
+  gscrabble = python3Packages.callPackage ../games/gscrabble { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   gshogi = python3Packages.callPackage ../games/gshogi { };
 
@@ -32651,7 +32651,7 @@ with pkgs;
 
   cp2k = callPackage ../applications/science/chemistry/cp2k { };
 
-  d-seams = callPackage ../applications/science/chemistry/d-seams {};
+  d-seams = callPackage ../applications/science/chemistry/d-seams { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;;
 
   ergoscf = callPackage ../applications/science/chemistry/ergoscf { };
 
@@ -33560,8 +33560,7 @@ with pkgs;
   cntk = callPackage ../applications/science/math/cntk {
     stdenv = gcc7Stdenv;
     inherit (linuxPackages) nvidia_x11;
-    opencv3 = opencv3WithoutCuda; # Used only for image loading.
-    cudaSupport = config.cudaSupport or false;
+    opencv3 = opencv3WithoutCuda;
   };
 
   dap = callPackage ../applications/science/math/dap { };
