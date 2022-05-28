@@ -8921,7 +8921,7 @@ with pkgs;
   ola = callPackage ../applications/misc/ola { };
 
   olive-editor = libsForQt514.callPackage ../applications/video/olive-editor
- 
+
   { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;     inherit (darwin.apple_sdk.frameworks) CoreFoundation;   };
 
   ombi = callPackage ../servers/ombi { };
