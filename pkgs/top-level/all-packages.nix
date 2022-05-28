@@ -7055,8 +7055,9 @@ with pkgs;
 
   idle3tools = callPackage ../tools/system/idle3tools { };
 
-  ifcopenshell = with python3Packages; (toPythonApplication ifcopenshell).override
-    { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
+  ifcopenshell = with python3Packages; (toPythonApplication ifcopenshell).override {
+    stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;
+  };
 
   iftop = callPackage ../tools/networking/iftop { };
 
@@ -7222,7 +7223,7 @@ with pkgs;
     boost = boost16x;
   };
 
-  isrcsubmit = callPackage ../tools/audio/isrcsubmit { };
+  isrcsubmit = callPackage ../tools/audio/isrcsubmit { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   isync = callPackage ../tools/networking/isync {
     inherit (darwin.apple_sdk.frameworks) Security;
@@ -7507,7 +7508,7 @@ with pkgs;
 
   peruse = libsForQt5.callPackage ../tools/misc/peruse { };
 
-  ksmoothdock = libsForQt5.callPackage ../applications/misc/ksmoothdock { };
+  ksmoothdock = libsForQt5.callPackage ../applications/misc/ksmoothdock { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   kstars = libsForQt5.callPackage ../applications/science/astronomy/kstars { };
 
@@ -8127,7 +8128,7 @@ with pkgs;
 
   lokalise2-cli = callPackage ../tools/misc/lokalise2-cli { };
 
-  loki = callPackage ../development/libraries/loki { };
+  loki = callPackage ../development/libraries/loki { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   longview = callPackage ../servers/monitoring/longview { };
 
@@ -8365,7 +8366,7 @@ with pkgs;
 
   mkclean = callPackage ../applications/video/mkclean {};
 
-  mkcue = callPackage ../tools/cd-dvd/mkcue { };
+  mkcue = callPackage ../tools/cd-dvd/mkcue { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   mkp224o = callPackage ../tools/security/mkp224o { };
 
@@ -8457,7 +8458,7 @@ with pkgs;
 
   multitime = callPackage ../tools/misc/multitime { };
 
-  sta = callPackage ../tools/misc/sta {};
+  sta = callPackage ../tools/misc/sta { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   multitran = recurseIntoAttrs (let callPackage = newScope pkgs.multitran; in {
     multitrandata = callPackage ../tools/text/multitran/data { };
@@ -8919,9 +8920,9 @@ with pkgs;
 
   ola = callPackage ../applications/misc/ola { };
 
-  olive-editor = libsForQt514.callPackage ../applications/video/olive-editor {
-    inherit (darwin.apple_sdk.frameworks) CoreFoundation;
-  };
+  olive-editor = libsForQt514.callPackage ../applications/video/olive-editor
+ 
+  { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;     inherit (darwin.apple_sdk.frameworks) CoreFoundation;   };
 
   ombi = callPackage ../servers/ombi { };
 
@@ -8932,7 +8933,7 @@ with pkgs;
     inherit (darwin.apple_sdk.frameworks) CoreFoundation Security;
   };
 
-  onioncircuits = callPackage ../tools/security/onioncircuits { };
+  onioncircuits = callPackage ../tools/security/onioncircuits { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   onlykey-agent = callPackage ../tools/security/onlykey-agent { };
 
@@ -8953,7 +8954,7 @@ with pkgs;
 
   opencryptoki = callPackage ../tools/security/opencryptoki { };
 
-  opendbx = callPackage ../development/libraries/opendbx { };
+  opendbx = callPackage ../development/libraries/opendbx { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   opendht = callPackage ../development/libraries/opendht  {
     inherit (darwin.apple_sdk.frameworks) Security;
@@ -9224,6 +9225,7 @@ with pkgs;
   };
   percona-xtrabackup_8_0 = callPackage ../tools/backup/percona-xtrabackup/8_0.nix {
     boost = boost170;
+    stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;
   };
 
   pick = callPackage ../tools/misc/pick { };
@@ -12449,7 +12451,7 @@ with pkgs;
     '';
   };
 
-  copper = callPackage ../development/compilers/copper { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;;
+  copper = callPackage ../development/compilers/copper { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   inherit (callPackages ../development/compilers/crystal {
     llvmPackages = if stdenv.system == "aarch64-darwin" then llvmPackages_11 else llvmPackages_10;
@@ -13502,6 +13504,7 @@ with pkgs;
   mint = callPackage ../development/compilers/mint { };
 
   mitscheme = callPackage ../development/compilers/mit-scheme {
+    stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;
     texLive = texlive.combine { inherit (texlive) scheme-small epsf texinfo; };
   };
 
@@ -13549,8 +13552,9 @@ with pkgs;
   mosml = callPackage ../development/compilers/mosml { };
 
   mozart2 = callPackage ../development/compilers/mozart {
+    stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;
     emacs = emacs-nox;
-    jre_headless = jre8_headless; # TODO: remove override https://github.com/NixOS/nixpkgs/pull/89731
+    jre_headless = jre8_headless;
   };
 
   mozart2-binary = callPackage ../development/compilers/mozart/binary.nix { };
@@ -21271,7 +21275,7 @@ with pkgs;
 
   zlib-ng = callPackage ../development/libraries/zlib-ng { };
 
-  libdynd = callPackage ../development/libraries/libdynd { };
+  libdynd = callPackage ../development/libraries/libdynd { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   zlog = callPackage ../development/libraries/zlog { };
 
@@ -27483,7 +27487,7 @@ with pkgs;
 
   jgmenu = callPackage ../applications/misc/jgmenu { };
 
-  jigdo = callPackage ../applications/misc/jigdo { };
+  jigdo = callPackage ../applications/misc/jigdo { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   jitsi = callPackage ../applications/networking/instant-messengers/jitsi { };
 
@@ -27572,7 +27576,7 @@ with pkgs;
 
   klayout = libsForQt5.callPackage ../applications/misc/klayout { };
 
-  klee = callPackage ../applications/science/logic/klee { };
+  klee = callPackage ../applications/science/logic/klee { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   kmetronome = libsForQt5.callPackage ../applications/audio/kmetronome { };
 
@@ -32651,7 +32655,7 @@ with pkgs;
 
   cp2k = callPackage ../applications/science/chemistry/cp2k { };
 
-  d-seams = callPackage ../applications/science/chemistry/d-seams { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv;;
+  d-seams = callPackage ../applications/science/chemistry/d-seams { stdenv = if stdenv.cc.isGNU then gcc10Stdenv else stdenv; };
 
   ergoscf = callPackage ../applications/science/chemistry/ergoscf { };
 
@@ -35435,3 +35439,22 @@ with pkgs;
 
   mictray = callPackage ../tools/audio/mictray { };
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
